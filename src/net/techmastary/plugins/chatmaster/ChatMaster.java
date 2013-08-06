@@ -28,7 +28,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void OnPlayerChat(AsyncPlayerChatEvent event) {
-		if (!event.getPlayer().hasPermission("chat.speak") && (Muted == true) || !event.getPlayer().hasPermission("chat.admin")) {
+		if (!event.getPlayer().hasPermission("chat.speak") && (Muted == true)) {
 			event.setCancelled(true);
 			event.getPlayer().sendMessage(ChatColor.RED + "Global chat is currently disabled.");
 		}
