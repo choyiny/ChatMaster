@@ -75,6 +75,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 					if (x == 119) {
 						sender.sendMessage(ChatColor.GRAY + "You are now deafened and cannot use chat.");
 						//TODO: Make player unable to send/recieve chat
+						//TODO: Add config
 					}
 				}
 			}
