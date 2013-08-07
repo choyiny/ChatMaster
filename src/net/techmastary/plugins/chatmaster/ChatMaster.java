@@ -38,7 +38,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 	public void OnPlayerJoin(PlayerJoinEvent event) {
 		if (Muted == true) {
 			event.getPlayer().sendMessage(ChatColor.GRAY + "Global chat is currently disabled.");
-			if (event.getPlayer().hasPermission("silenced.admin")) {
+			if (event.getPlayer().hasPermission("chat.speak")) {
 				event.getPlayer().sendMessage(ChatColor.GRAY + "You have permission to talk.");
 			}
 
@@ -47,7 +47,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("silence")) {
-			if (sender.hasPermission("chat.admin")) {
+			if (sender.hasPermission("chat.silence")) {
 				if (Muted == false) {
 					Muted = true;
 					sender.sendMessage(ChatColor.GRAY + "You silenced global chat.");
@@ -60,16 +60,16 @@ public class ChatMaster extends JavaPlugin implements Listener {
 			}
 		}
 		if (label.equalsIgnoreCase("chatstatus")) {
-			if (sender.hasPermission("chat.admin") && (Muted == true)) {
+			if (sender.hasPermission("chat.status") && (Muted == true)) {
 				sender.sendMessage(ChatColor.GRAY + "Global chat is currently" + ChatColor.RED + " DISABLED" + ChatColor.GRAY + ".");
 			}
-			if (sender.hasPermission("chat.admin") && (Muted == false)) {
+			if (sender.hasPermission("chat.status") && (Muted == false)) {
 				sender.sendMessage(ChatColor.GRAY + "Global chat is currently" + ChatColor.GREEN + " ENABLED" + ChatColor.GRAY + ".");
 
 			}
 		}
 		if (label.equalsIgnoreCase("deafen")) {
-			if (sender.hasPermission("silenced.admin")) {
+			if (sender.hasPermission("chat.deafen")) {
 				for (int x = 0; x < 120; x++) {
 					sender.sendMessage("");
 					if (x == 119) {
