@@ -16,12 +16,12 @@ public class ChatMaster extends JavaPlugin implements Listener {
 
 	@Override
 	public void onDisable() {
-		System.out.println("Disabled Silenced.");
+		System.out.println("Disabled ChatMaster 1.0.");
 	}
 
 	@Override
 	public void onEnable() {
-		System.out.println("Enabled Silenced.");
+		System.out.println("Enabled ChatMaster 1.0.");
 		getServer().getPluginManager().registerEvents(this, this);
 		Muted = false;
 	}
@@ -30,7 +30,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 	public void OnPlayerChat(AsyncPlayerChatEvent event) {
 		if (!event.getPlayer().hasPermission("chat.speak") && (Muted == true)) {
 			event.setCancelled(true);
-			event.getPlayer().sendMessage(ChatColor.RED + "Global chat is currently disabled.");
+			event.getPlayer().sendMessage(ChatColor.GRAY + "Global chat is currently disabled.");
 		}
 	}
 
