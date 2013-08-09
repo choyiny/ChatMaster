@@ -8,13 +8,8 @@ startup: postworld
 url: http://TechMastary.net/
 version: '1.0'
 commands:
-  silence:
-    description: Toggle the use of global chat.
-    permission: chat.silence
-    usage: /[command]
-  chatstatus:
-    description: Check the status of global chat.
-    permission: chat.status
+  cm:
+    description: ChatMaster base command.
     usage: /[command]
 permissions:
   chat.silence:
@@ -23,3 +18,5 @@ permissions:
     description: Be able to speak in global chat while disabled.
   chat.status:
     description: Check the status of global chat.
+  chat.clean:
+    description: Clean your own chat.
