@@ -34,13 +34,13 @@ public class ChatCommand implements CommandExecutor {
 		}
 		if (args[0].equalsIgnoreCase("silence")) {
 			if (sender.hasPermission("chat.silence")) {
-				if (ChatMaster.Muted == false) {
-					ChatMaster.Muted = true;
+				if (ChatMaster.Silenced == false) {
+					ChatMaster.Silenced = true;
 					sender.sendMessage(ChatColor.GRAY + "You silenced global chat.");
 					Bukkit.broadcastMessage(ChatColor.GRAY + "" + sender.getName() + " disabled global chat.");
 					return true;
 				} else {
-					ChatMaster.Muted = false;
+					ChatMaster.Silenced = false;
 					sender.sendMessage(ChatColor.GRAY + "You have resumed global chat.");
 					Bukkit.broadcastMessage(ChatColor.GRAY + "" + sender.getName() + " resumed global chat.");
 					return true;
@@ -50,14 +50,19 @@ public class ChatCommand implements CommandExecutor {
 			}
 		}
 		if (args[0].equalsIgnoreCase("chatstatus")) {
-			if (sender.hasPermission("chat.status") && (ChatMaster.Muted == true)) {
+			if (sender.hasPermission("chat.status") && (ChatMaster.Silenced == true)) {
 				sender.sendMessage(ChatColor.GRAY + "Global chat is currently" + ChatColor.RED + " DISABLED" + ChatColor.GRAY + ".");
 			}
-			if (sender.hasPermission("chat.status") && (ChatMaster.Muted == false)) {
+			if (sender.hasPermission("chat.status") && (ChatMaster.Silenced == false)) {
 				sender.sendMessage(ChatColor.GRAY + "Global chat is currently" + ChatColor.GREEN + " ENABLED" + ChatColor.GRAY + ".");
 			}
 		}
-		if (args[0].equalsIgnoreCase("cleanchat")) {
+		
+		if (args[0].equalsIgnoreCase("easteregg")) {
+			sender.sendMessage("Congratulations, you have found the easter egg of this plugin!");
+		}
+		
+		if (args[0].equalsIgnoreCase("cleanchat") || (args[0].equalsIgnoreCase("clearchat"))) {
 			if (args.length == 1) {
 				if (sender.hasPermission("chat.clean")) {
 					for (int x = 0; x < 120; x++) {
@@ -98,6 +103,26 @@ public class ChatCommand implements CommandExecutor {
 				}
 			}
 		}
+
+		if (args[0].equalsIgnoreCase("deafen")) {
+			if (!(sender instanceof Player)) {
+				sender.sendMessage("Not allowed to execute through console.");
+				return true;
+			}
+			if (!ChatEventListener.nochat.contains(sender.getName())) {
+				if (sender.hasPermission("chat.deafen")) {
+					ChatEventListener.nochat.add(sender.getName());
+					sender.sendMessage(ChatColor.GRAY + "You are now deafened.");
+				} else {
+					return false;
+				}
+			} else {
+				ChatEventListener.nochat.remove(sender.getName());
+				sender.sendMessage(ChatColor.GRAY + "You are now undeafened.");
+			}
+
+		}
+
 		return true;
 	}
 }
