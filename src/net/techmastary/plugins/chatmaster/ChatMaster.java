@@ -25,6 +25,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 	}
 
 	private void loadConf() {
-		// TODO: Insert custom message config.
+		getConfig().addDefault("Silence player without permissions", false);
+		getConfig().addDefault("Deafen player without permissions", false);
 	}
 }
