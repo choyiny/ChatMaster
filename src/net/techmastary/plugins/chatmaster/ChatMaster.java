@@ -23,8 +23,8 @@ public class ChatMaster extends JavaPlugin implements Listener {
 		getServer().getPluginCommand("cm").setExecutor(this.chatcmds);
 		Silenced = false;
 	}
-	
+
 	private void loadConf() {
-		//TODO: Insert custom message config.
+		// TODO: Insert custom message config.
 	}
 }

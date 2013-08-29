@@ -22,6 +22,7 @@ public class ChatEventListener implements Listener {
 			event.setCancelled(true);
 			event.getPlayer().sendMessage(ChatColor.GRAY + "Global chat is currently " + ChatColor.RED + "Disabled.");
 		}
+
 		Set<?> receivers = event.getRecipients();
 		Player[] online = Bukkit.getServer().getOnlinePlayers();
 		for (Player p : online) {
