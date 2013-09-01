@@ -8,7 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ChatCommand implements CommandExecutor {
-	double version = ChatMaster.version;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -18,7 +17,7 @@ public class ChatCommand implements CommandExecutor {
 		}
 		if (args.length == 1) {
 			if (args[0].equalsIgnoreCase("help")) {
-				sender.sendMessage(ChatColor.YELLOW + "==== ChatMaster " + version + " ====");
+				sender.sendMessage(ChatColor.YELLOW + "==== ChatMaster " + "1.1.4" + " ====");
 				sender.sendMessage(ChatColor.GOLD + "Your available commands:");
 				if (sender.hasPermission("chat.silence")) {
 					sender.sendMessage(ChatColor.GOLD + "/cm silence - Silences global chat.");
@@ -27,10 +26,16 @@ public class ChatCommand implements CommandExecutor {
 						sender.sendMessage(ChatColor.GOLD + "/cm chatstatus - Check for current global chat status");
 					}
 					if (sender.hasPermission("chat.clean")) {
-						sender.sendMessage(ChatColor.GOLD + "/cm cleanchat - Cleans your chat.");
+						sender.sendMessage(ChatColor.GOLD + "/cm cleanchat <all/playername> - Cleans the players chat.");
+					}
+					if (sender.hasPermission("chat.deafen")) {
+						sender.sendMessage(ChatColor.GOLD + "/cm deafen <playername> - Deafens a player.");
 					}
 					return true;
 				}
+			}
+			if (args[0].equalsIgnoreCase("version")) {
+				sender.sendMessage(ChatColor.GOLD + "Running" + ChatColor.RED + "ChatMaster v1.1.4 BukkitDev Build");
 			}
 			if (args[0].equalsIgnoreCase("silence")) {
 				if (sender.hasPermission("chat.silence")) {
