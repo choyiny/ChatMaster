@@ -7,18 +7,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class ChatMaster extends JavaPlugin implements Listener {
 	public static boolean Silenced;
 	ChatCommand chatcmds = new ChatCommand();
-	public static double version = 1.1;
 	ChatEventListener chateventlistener = new ChatEventListener();
 
 	@Override
 	public void onDisable() {
-		System.out.println("Disabled ChatMaster " + version + ".");
+		System.out.println("Disabled ChatMaster " + getDescription().getVersion() + ".");
 	}
 
 	@Override
 	public void onEnable() {
 		loadConf();
-		System.out.println("Enabled ChatMaster " + version + ".");
+		System.out.println("Enabled ChatMaster " + getDescription().getVersion() + ".");
 		getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(this.chateventlistener, this);
 		getServer().getPluginCommand("cm").setExecutor(this.chatcmds);
@@ -31,7 +30,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 				// I'm sad.
 			}
 		} else {
-			System.out.print("[AdminUtils] Metrics was not enabled");
+			System.out.print("[ChatMaster] Metrics was not enabled");
 		}
 	}
 
