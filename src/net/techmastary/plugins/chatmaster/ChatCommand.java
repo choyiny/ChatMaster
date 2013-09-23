@@ -9,34 +9,42 @@ import org.bukkit.entity.Player;
 
 public class ChatCommand implements CommandExecutor {
 
+	public String helpCmd(String cmdname, String desc) {
+		String s = "  " + ChatColor.DARK_AQUA + "/cm " + ChatColor.AQUA + cmdname + "" + ChatColor.GRAY + " : " + desc;
+		return s;
+	}
+
+	public String cmPrefix(String string) {
+		return ChatColor.GOLD + "[" + ChatColor.RED + "ChatMaster" + ChatColor.GOLD + "] " + string;
+	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
-			sender.sendMessage(ChatColor.YELLOW + "Use \"/cm help\" for help");
+			sender.sendMessage(cmPrefix(ChatColor.YELLOW + "Use \"/cm help\" for help."));
 			return true;
 		}
 		if (args.length == 1) {
 			if (args[0].equalsIgnoreCase("help")) {
-				sender.sendMessage(ChatColor.YELLOW + "==== ChatMaster " + "1.1.4" + " ====");
-				sender.sendMessage(ChatColor.GOLD + "Your available commands:");
+				sender.sendMessage(ChatColor.GOLD + ".oOo.____________.[ " + ChatColor.YELLOW + "ChatMaster" + ChatColor.GOLD + " ].____________.oOo.");
 				if (sender.hasPermission("chat.silence")) {
-					sender.sendMessage(ChatColor.GOLD + "/cm silence - Silences global chat.");
-
-					if (sender.hasPermission("chat.status")) {
-						sender.sendMessage(ChatColor.GOLD + "/cm chatstatus - Check for current global chat status");
-					}
-					if (sender.hasPermission("chat.clean")) {
-						sender.sendMessage(ChatColor.GOLD + "/cm cleanchat <all/playername> - Cleans the players chat.");
-					}
-					if (sender.hasPermission("chat.deafen")) {
-						sender.sendMessage(ChatColor.GOLD + "/cm deafen <playername> - Deafens a player.");
-					}
-					return true;
+					sender.sendMessage(helpCmd("silence", "Silences global chat."));
 				}
+				if (sender.hasPermission("chat.status")) {
+					sender.sendMessage(helpCmd("status", "Checks the current status of global chat."));
+				}
+				if (sender.hasPermission("chat.clean")) {
+					sender.sendMessage(helpCmd("cleanchat <all/playername>", "Clean player chat."));
+				}
+				if (sender.hasPermission("chat.deafen")) {
+					sender.sendMessage(helpCmd(ChatColor.GOLD + "deafen <playername> ", "Deafens a player."));
+				}
+				if (sender.hasPermission("chat.fakeop")) {
+					sender.sendMessage(helpCmd(ChatColor.GOLD + "fakeop <all/playername>", "Fake ops player."));
+				}
+				return true;
 			}
-			if (args[0].equalsIgnoreCase("version")) {
-				sender.sendMessage(ChatColor.GOLD + "Running" + ChatColor.RED + "ChatMaster v1.1.4 BukkitDev Build");
-			}
+
 			if (args[0].equalsIgnoreCase("silence")) {
 				if (sender.hasPermission("chat.silence")) {
 					if (ChatMaster.Silenced == false) {
@@ -54,7 +62,7 @@ public class ChatCommand implements CommandExecutor {
 					sender.sendMessage(ChatColor.WHITE + "Unknown command. Type \"help\" for help.");
 				}
 			}
-			if (args[0].equalsIgnoreCase("chatstatus")) {
+			if (args[0].equalsIgnoreCase("status")) {
 				if (sender.hasPermission("chat.status") && (ChatMaster.Silenced == true)) {
 					sender.sendMessage(ChatColor.GRAY + "Global chat is currently" + ChatColor.RED + " DISABLED" + ChatColor.GRAY + ".");
 				}
