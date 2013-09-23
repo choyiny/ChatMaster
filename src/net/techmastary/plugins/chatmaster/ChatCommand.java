@@ -24,6 +24,7 @@ public class ChatCommand implements CommandExecutor {
 			sender.sendMessage(cmPrefix(ChatColor.YELLOW + "Use \"/cm help\" for help."));
 			return true;
 		}
+		if (args.length >= 1) {
 			if (args[0].equalsIgnoreCase("help")) {
 				sender.sendMessage(ChatColor.GOLD + ".oOo.____________.[ " + ChatColor.YELLOW + "ChatMaster" + ChatColor.GOLD + " ].____________.oOo.");
 				if (sender.hasPermission("chat.silence")) {
@@ -134,6 +135,7 @@ public class ChatCommand implements CommandExecutor {
 				}
 
 			}
+		}
 		return true;
 	}
 }
