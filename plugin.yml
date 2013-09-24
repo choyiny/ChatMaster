@@ -9,7 +9,10 @@ version: '1.2'
 commands:
   cm:
     description: ChatMaster base command.
-    usage: /[command]
+    usage: /[command] <args>
+  ping:
+    description: Pings player.
+    usage: /[command] <player>
 permissions:
   chat.silence:
     description: Have access to all features and be able to speak in global chat when disabled.
