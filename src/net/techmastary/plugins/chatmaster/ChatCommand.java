@@ -62,7 +62,7 @@ public class ChatCommand implements CommandExecutor {
 					sender.sendMessage(ChatColor.WHITE + "Unknown command. Type \"help\" for help.");
 				}
 			}
-			
+
 			if (args[0].equalsIgnoreCase("status")) {
 				if (sender.hasPermission("chat.status") && (ChatMaster.Silenced == true)) {
 					sender.sendMessage(ChatColor.GRAY + "Global chat is currently" + ChatColor.RED + " DISABLED" + ChatColor.GRAY + ".");
@@ -125,7 +125,7 @@ public class ChatCommand implements CommandExecutor {
 					sender.sendMessage("Not allowed to execute through console.");
 					return true;
 				}
-				
+
 				if (!ChatEventListener.nochat.contains(sender.getName())) {
 					if (sender.hasPermission("chat.deafen")) {
 						ChatEventListener.nochat.add(sender.getName());
@@ -137,19 +137,24 @@ public class ChatCommand implements CommandExecutor {
 					ChatEventListener.nochat.remove(sender.getName());
 					sender.sendMessage(ChatColor.GRAY + "You are now undeafened.");
 				}
-				
-				//TODO: This is not finished!
 				if (args.length >= 2) {
 					Player target = Bukkit.getServer().getPlayer(args[1]);
-					if (Bukkit.getServer().getPlayer(args[1]) != null) {
+					if (!ChatEventListener.nochat.contains(target.getName())) {
+						if (Bukkit.getServer().getPlayer(args[1]) != null) {
+							target.sendMessage(ChatColor.GRAY + "You have been deafened by " + sender.getName());
+							sender.sendMessage(ChatColor.GRAY + "You have deafened " + target.getName());
+							ChatEventListener.nochat.add(target.getName());
+						} else {
+							sender.sendMessage(ChatColor.RED + "ERROR: " + ChatColor.GRAY + "Player not found.");
+						}
+					}
+					if (ChatEventListener.nochat.contains(target.getName())) {
 						target.sendMessage(ChatColor.GRAY + "You have been deafened by " + sender.getName());
 						sender.sendMessage(ChatColor.GRAY + "You have deafened " + target.getName());
-					} else {
-						sender.sendMessage(ChatColor.RED + "ERROR: " + ChatColor.GRAY + "Player not found.");
+						ChatEventListener.nochat.remove(target.getName());
 					}
 
 				}
-
 			}
 			if (args[0].equalsIgnoreCase("fakeop")) {
 				if (sender.hasPermission("chat.fakeop")) {
