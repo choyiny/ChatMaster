@@ -3,7 +3,8 @@ ChatMaster - A bukkit plugin.
 
 Gain control of your servers' chat.
 
-==Features==
+Features:
+=========
 
 *Disable global chat through a command (Togglable)
 *Players know who disabled global chat (soon to be configurable)
@@ -16,7 +17,8 @@ Gain control of your servers' chat.
 *Help menu for players who has permissions to the command
 
 
-==Source:==
+Source:
+=========
 
 Stable: https://github.com/TechMastary/ChatMaster
 Development: https://github.com/hkminegod/ChatMaster
