@@ -5,17 +5,12 @@ main: net.techmastary.plugins.chatmaster.ChatMaster
 name: ChatMaster
 startup: postworld
 url: http://TechMastary.net/
-version: '1.2'
+version: '1.2.1'
 commands:
   cm:
     description: ChatMaster base command.
-    usage: /[command]
+    usage: /[command] <args>
+  pping:
+    description: Pings player.
+    usage: /[command] <player>
 permissions:
-  chat.silence:
-    description: Have access to all features and be able to speak in global chat when disabled.
-  chat.speak:
-    description: Be able to speak in global chat while disabled.
-  chat.status:
-    description: Check the status of global chat.
-  chat.clean:
-    description: Clean your own chat.

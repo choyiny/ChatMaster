@@ -31,6 +31,7 @@ public class ChatEventListener implements Listener {
 
 		if (!event.getPlayer().hasPermission("chat.speak")) {
 			event.setCancelled(true);
+			event.getPlayer().sendMessage(ChatColor.DARK_RED + "You do not have the permission to speak in global chat.");
 		}
 
 		if (!event.getPlayer().hasPermission("chat.listen")) {
@@ -45,6 +46,15 @@ public class ChatEventListener implements Listener {
 			if (event.getPlayer().hasPermission("chat.bypass")) {
 				event.getPlayer().sendMessage(ChatColor.GRAY + "You have permission to talk.");
 			}
+		}
+		if (!event.getPlayer().hasPermission("chat.listen")) {
+			event.getPlayer().sendMessage(ChatColor.DARK_RED + "You may not participate in global chat.");
+		}
+		if (event.getPlayer().hasPermission("chat.update") && ChatMaster.update) {
+			event.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.RED + "ChatMaster" + ChatColor.GOLD + "] " + ChatColor.GREEN + "An update is available: " + ChatMaster.name + "(" + ChatMaster.size + " bytes");
+			// Will look like - An update is available: AntiCheat v1.3.6 (93738
+			// bytes)
+			event.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.RED + "ChatMaster" + ChatColor.GOLD + "] " + ChatColor.GREEN + "Type /cmupdate if you would like to update.");
 		}
 	}
 }
