@@ -13,4 +13,7 @@ commands:
   pping:
     description: Pings player.
     usage: /[command] <player>
+  cmupdate:
+    description: Update ChatMaster
+    usage: /[command]
 permissions:
