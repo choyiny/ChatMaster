@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -36,6 +37,9 @@ public class ChatEventListener implements Listener {
 
 		if (!event.getPlayer().hasPermission("chat.listen")) {
 			ChatEventListener.nochat.add(event.getPlayer().getName());
+		}
+		
+		if (event.getMessage().equalsIgnoreCase("")) {
 		}
 	}
 

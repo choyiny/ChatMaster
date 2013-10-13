@@ -40,7 +40,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 				Metrics metrics = new Metrics(this);
 				metrics.start();
 			} catch (IOException e) {
-				// I'm sad.
+				// I'm sad lol.
 			}
 		} else {
 			System.out.println("[ChatMaster] Metrics was not enabled");

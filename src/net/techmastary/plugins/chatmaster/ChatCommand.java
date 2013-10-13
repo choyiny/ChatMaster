@@ -26,7 +26,7 @@ public class ChatCommand implements CommandExecutor {
 		}
 		if (args.length >= 1) {
 			if (args[0].equalsIgnoreCase("help")) {
-				sender.sendMessage(ChatColor.GOLD + ".oOo.____________.[ " + ChatColor.YELLOW + "ChatMaster" + ChatColor.GOLD + " ].____________.oOo.");
+				sender.sendMessage(ChatColor.GOLD + ".oOo.____________.[ " + ChatColor.YELLOW + "ChatMaster by TechMastary" + ChatColor.GOLD + " ].____________.oOo.");
 				if (sender.hasPermission("chat.silence")) {
 					sender.sendMessage(helpCmd("silence", "Silences global chat."));
 				}
