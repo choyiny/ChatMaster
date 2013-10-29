@@ -31,10 +31,9 @@ public class ChatMaster extends JavaPlugin implements Listener {
 		getServer().getPluginCommand("cm").setExecutor(this.chatcmds);
 		getServer().getPluginCommand("pping").setExecutor(this.chatping);
 		Silenced = false;
-		Updater updater = new Updater(this, "ChatMaster", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
+		Updater updater = new Updater(this, 63203, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
 		update = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
-		name = updater.getLatestVersionString(); // Get the latest version
-		size = updater.getFileSize(); // Get latest size
+		name = updater.getLatestName();
 		if (getConfig().getBoolean("metrics")) {
 			try {
 				Metrics metrics = new Metrics(this);
@@ -50,8 +49,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (label.equalsIgnoreCase("cmupdate")) {
 			if (sender.hasPermission("chat.update") && ChatMaster.update) {
-				@SuppressWarnings("unused")
-				Updater updater = new Updater(this, "chatmaster", this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
+				Updater updater = new Updater(this, 63203, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
 				sender.sendMessage("ChatMaster is updating. Check console for progress.");
 			}
 		}
@@ -59,5 +57,15 @@ public class ChatMaster extends JavaPlugin implements Listener {
 		return true;
 
 	}
+
+	public static String colorize(String string) {
+		if (string == null) {
+			return null;
+		}
+		return string.replaceAll("&([0-9a-f])", "\u00A7$1");
+	}
+
+	static String invalid_arguments = colorize("&cInvalid Arguments, Do /cm help for help!");
+	static String player_not_found = colorize("&4ERROR: &cPlayer Not found.");
 
 }
