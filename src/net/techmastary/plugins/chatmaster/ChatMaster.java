@@ -64,8 +64,4 @@ public class ChatMaster extends JavaPlugin implements Listener {
 		}
 		return string.replaceAll("&([0-9a-f])", "\u00A7$1");
 	}
-
-	static String invalid_arguments = colorize("&cInvalid Arguments, Do /cm help for help!");
-	static String player_not_found = colorize("&4ERROR: &cPlayer Not found.");
-
 }

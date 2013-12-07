@@ -25,7 +25,7 @@ public class ChatEventListener implements Listener {
 				continue;
 			receivers.remove(p);
 		}
-		if (!event.getPlayer().hasPermission("chat.bypass") && (ChatMaster.Silenced == true)) {
+		if (!event.getPlayer().hasPermission("chat.bypass") && (ChatMaster.Silenced)) {
 			event.setCancelled(true);
 			event.getPlayer().sendMessage(ChatColor.GRAY + "Global chat is currently " + ChatColor.RED + "Disabled.");
 		}
@@ -45,7 +45,7 @@ public class ChatEventListener implements Listener {
 
 	@EventHandler(priority = EventPriority.LOW)
 	public void OnPlayerJoin(PlayerJoinEvent event) {
-		if (ChatMaster.Silenced == true) {
+		if (ChatMaster.Silenced) {
 			event.getPlayer().sendMessage(ChatColor.GRAY + "Global chat is currently disabled.");
 			if (event.getPlayer().hasPermission("chat.bypass")) {
 				event.getPlayer().sendMessage(ChatColor.GRAY + "You have permission to talk.");
@@ -56,8 +56,6 @@ public class ChatEventListener implements Listener {
 		}
 		if (event.getPlayer().hasPermission("chat.update") && ChatMaster.update) {
 			event.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.RED + "ChatMaster" + ChatColor.GOLD + "] " + ChatColor.GREEN + "An update is available: " + ChatMaster.name + "(" + ChatMaster.size + " bytes");
-			// Will look like - An update is available: AntiCheat v1.3.6 (93738
-			// bytes)
 			event.getPlayer().sendMessage(ChatColor.GOLD + "[" + ChatColor.RED + "ChatMaster" + ChatColor.GOLD + "] " + ChatColor.GREEN + "Type /cmupdate if you would like to update.");
 		}
 	}

@@ -47,7 +47,7 @@ public class ChatCommand implements CommandExecutor {
 
 			if (args[0].equalsIgnoreCase("silence")) {
 				if (sender.hasPermission("chat.silence")) {
-					if (ChatMaster.Silenced == false) {
+					if (!ChatMaster.Silenced) {
 						ChatMaster.Silenced = true;
 						sender.sendMessage(ChatColor.GRAY + "You silenced global chat.");
 						Bukkit.broadcastMessage(ChatColor.GRAY + "" + sender.getName() + " disabled global chat.");
@@ -64,18 +64,13 @@ public class ChatCommand implements CommandExecutor {
 			}
 
 			if (args[0].equalsIgnoreCase("status")) {
-				if (sender.hasPermission("chat.status") && (ChatMaster.Silenced == true)) {
+				if (sender.hasPermission("chat.status") && (ChatMaster.Silenced)) {
 					sender.sendMessage(ChatColor.GRAY + "Global chat is currently" + ChatColor.RED + " DISABLED" + ChatColor.GRAY + ".");
 				}
-				if (sender.hasPermission("chat.status") && (ChatMaster.Silenced == false)) {
+				if (sender.hasPermission("chat.status") && (!ChatMaster.Silenced)) {
 					sender.sendMessage(ChatColor.GRAY + "Global chat is currently" + ChatColor.GREEN + " ENABLED" + ChatColor.GRAY + ".");
 				}
 			}
-
-			if (args[0].equalsIgnoreCase("easteregg")) {
-				sender.sendMessage(cmPrefix("Congratulations, you have found the easter egg of this plugin!"));
-			}
-
 			if (args[0].equalsIgnoreCase("cleanchat") || (args[0].equalsIgnoreCase("clearchat"))) {
 				if (args.length == 1) {
 					if (sender.hasPermission("chat.clean")) {
