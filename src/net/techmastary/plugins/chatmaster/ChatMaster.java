@@ -9,9 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class ChatMaster extends JavaPlugin implements Listener {
 	public static boolean Silenced;
-	ChatCommand chatcmds = new ChatCommand();
-	ChatPing chatping = new ChatPing();
-	ChatEventListener chateventlistener = new ChatEventListener();
 	public static boolean update = false;
 	public static String name = "";
 	public static long size = 0;
@@ -25,11 +22,13 @@ public class ChatMaster extends JavaPlugin implements Listener {
 	public void onEnable() {
 		this.saveDefaultConfig();
 		System.out.println("Enabled ChatMaster " + getDescription().getVersion() + ".");
-		System.out.println("Remember to subscribe to our Youtube channel for more updates: http://youtube.com/TechMastary");
+		System.out.println("Subscribe to our Youtube channel for more: http://youtube.com/TechMastary");
+		System.out.println("If you find any bugs, please report back to our BukkitDev page.");
 		getServer().getPluginManager().registerEvents(this, this);
-		getServer().getPluginManager().registerEvents(this.chateventlistener, this);
-		getServer().getPluginCommand("cm").setExecutor(this.chatcmds);
-		getServer().getPluginCommand("pping").setExecutor(this.chatping);
+		getServer().getPluginManager().registerEvents(new ChatEventListener(), this);
+		getServer().getPluginManager().registerEvents(new JoinQuitListener(), this);
+		getServer().getPluginCommand("cm").setExecutor(new ChatCommand());
+		getServer().getPluginCommand("pping").setExecutor(new ChatPing());
 		Silenced = false;
 		Updater updater = new Updater(this, 63203, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
 		update = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
@@ -47,21 +46,17 @@ public class ChatMaster extends JavaPlugin implements Listener {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (label.equalsIgnoreCase("cmupdate")) {
-			if (sender.hasPermission("chat.update") && ChatMaster.update) {
-				Updater updater = new Updater(this, 63203, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
-				sender.sendMessage("ChatMaster is updating. Check console for progress.");
+		if (getConfig().getBoolean("update")) {
+			if (label.equalsIgnoreCase("cmupdate")) {
+				if (sender.hasPermission("chat.update") && ChatMaster.update) {
+					Updater updater = new Updater(this, 63203, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
+					sender.sendMessage("ChatMaster is updating. Check console for progress.");
+				}	
 			}
+		} else {
+			sender.sendMessage("Updating is not enabled. Please enable updating in the config file.");
 		}
-
 		return true;
 
-	}
-
-	public static String colorize(String string) {
-		if (string == null) {
-			return null;
-		}
-		return string.replaceAll("&([0-9a-f])", "\u00A7$1");
 	}
 }

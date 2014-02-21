@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class ChatCommand implements CommandExecutor {
+	static ChatMaster plugin;
 
 	public String helpCmd(String cmdname, String desc) {
 		String s = "  " + ChatColor.DARK_AQUA + "/cm " + ChatColor.AQUA + cmdname + "" + ChatColor.GRAY + " : " + desc;
