@@ -10,7 +10,7 @@
 metrics: true
 
 #Updating the plugin when there is a version.
-#(Done manually, type /cmupdate to update)
+#(Done manually in game, type /cmupdate to update)
 
 update: true
 
@@ -18,7 +18,9 @@ update: true
 
 joinmessage:
     enable: true
-    message: &e%player% joined the game.
+    message: '&e%player% joined the game.'
 leavemessage:
     enable: true
-    message: &e%player% left the game.
+    message: '&e%player% left the game.'
+    
+#Custom Message Configuration (Coming Soon)

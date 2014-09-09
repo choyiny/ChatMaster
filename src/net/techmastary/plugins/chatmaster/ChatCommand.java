@@ -19,6 +19,7 @@ public class ChatCommand implements CommandExecutor {
 		return ChatColor.GOLD + "[" + ChatColor.RED + "ChatMaster" + ChatColor.GOLD + "] " + string;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
@@ -27,9 +28,9 @@ public class ChatCommand implements CommandExecutor {
 		}
 		if (args.length >= 1) {
 			if (args[0].equalsIgnoreCase("help")) {
-				sender.sendMessage(ChatColor.GOLD + ".oOo.____________.[ " + ChatColor.YELLOW + "ChatMaster" + ChatColor.GOLD + " ].____________.oOo.");
+				sender.sendMessage(ChatColor.GOLD + ".oOo.___.[ " + ChatColor.YELLOW + "ChatMaster" + ChatColor.GOLD + " ].___.oOo.");
 				if (sender.hasPermission("chat.silence")) {
-					sender.sendMessage(helpCmd("silence", "Silences global chat."));
+					sender.sendMessage(helpCmd("silence", "Enable/ disable global chat"));
 				}
 				if (sender.hasPermission("chat.status")) {
 					sender.sendMessage(helpCmd("status", "Checks the current status of global chat."));
@@ -43,7 +44,22 @@ public class ChatCommand implements CommandExecutor {
 				if (sender.hasPermission("chat.fakeop")) {
 					sender.sendMessage(helpCmd("fakeop <playername>", "Fake ops player."));
 				}
+				if (sender.hasPermission("chat.pping")) {
+					sender.sendMessage("  " + ChatColor.AQUA + "/pping <playername>" + ChatColor.GRAY + " : Alert a player with a sound.");
+				}
+				if (sender.hasPermission("chat.reload")) {
+					sender.sendMessage(helpCmd("reload", "Reloads configuration file."));
+				}
+
 				return true;
+			}
+			
+			if (args[0].equalsIgnoreCase("reload")) {
+				if (sender.hasPermission("chat.reload")) {
+					plugin.reloadConfig();
+				} else {
+					sender.sendMessage(Messages.no_permission);
+				}
 			}
 
 			if (args[0].equalsIgnoreCase("silence")) {
@@ -60,7 +76,7 @@ public class ChatCommand implements CommandExecutor {
 						return true;
 					}
 				} else {
-					sender.sendMessage(ChatColor.WHITE + "Unknown command. Type \"help\" for help.");
+					sender.sendMessage(Messages.no_permission);
 				}
 			}
 
@@ -82,7 +98,7 @@ public class ChatCommand implements CommandExecutor {
 							}
 						}
 					} else {
-						sender.sendMessage(ChatColor.WHITE + "Unknown command. Type \"help\" for help.");
+						sender.sendMessage(Messages.no_permission);
 					}
 				} else if (args.length >= 2) {
 					if (args[1].equalsIgnoreCase("all")) {
@@ -94,7 +110,7 @@ public class ChatCommand implements CommandExecutor {
 							sender.sendMessage(ChatColor.GRAY + "You cleared everybody's chat.");
 							System.out.println("chat cleared for everybody.");
 						} else {
-							sender.sendMessage(ChatColor.WHITE + "Unknown command. Type \"help\" for help.");
+							sender.sendMessage(Messages.no_permission);
 						}
 					} else {
 						if (sender.hasPermission("chat.clean.others")) {
@@ -107,10 +123,10 @@ public class ChatCommand implements CommandExecutor {
 								p.sendMessage(ChatColor.GRAY + "Your chat has been cleared by: " + sender.getName());
 								System.out.println("chat cleared for " + p.getName());
 							} else {
-								sender.sendMessage(ChatColor.RED + "ERROR: " + ChatColor.GRAY + "Player not found.");
+								sender.sendMessage(Messages.player_not_found);
 							}
 						} else {
-							sender.sendMessage(ChatColor.WHITE + "Unknown command. Type \"help\" for help.");
+							sender.sendMessage(Messages.no_permission);
 						}
 					}
 				}
@@ -121,35 +137,36 @@ public class ChatCommand implements CommandExecutor {
 					sender.sendMessage("Not allowed to execute through console.");
 					return true;
 				}
-
-				if (!ChatEventListener.nochat.contains(sender.getName())) {
-					if (sender.hasPermission("chat.deafen")) {
+				if (sender.hasPermission("chat.deafen")) {
+					if (!ChatEventListener.nochat.contains(sender.getName())) {
 						ChatEventListener.nochat.add(sender.getName());
 						sender.sendMessage(ChatColor.GRAY + "You are now deafened.");
 					} else {
-						return false;
+						ChatEventListener.nochat.remove(sender.getName());
+						sender.sendMessage(ChatColor.GRAY + "You are now undeafened.");
 					}
-				} else {
-					ChatEventListener.nochat.remove(sender.getName());
-					sender.sendMessage(ChatColor.GRAY + "You are now undeafened.");
 				}
+
 				if (args.length >= 2) {
-					Player target = Bukkit.getServer().getPlayer(args[1]);
-					if (!ChatEventListener.nochat.contains(target.getName())) {
-						if (Bukkit.getServer().getPlayer(args[1]) != null) {
+					if (sender.hasPermission("chat.deafen.other")) {
+						Player target = Bukkit.getServer().getPlayer(args[1]);
+						if (!ChatEventListener.nochat.contains(target.getName())) {
+							if (Bukkit.getServer().getPlayer(args[1]) != null) {
+								target.sendMessage(ChatColor.GRAY + "You have been deafened by " + sender.getName());
+								sender.sendMessage(ChatColor.GRAY + "You have deafened " + target.getName());
+								ChatEventListener.nochat.add(target.getName());
+							} else {
+								sender.sendMessage(Messages.player_not_found);
+							}
+						}
+						if (ChatEventListener.nochat.contains(target.getName())) {
 							target.sendMessage(ChatColor.GRAY + "You have been deafened by " + sender.getName());
 							sender.sendMessage(ChatColor.GRAY + "You have deafened " + target.getName());
-							ChatEventListener.nochat.add(target.getName());
-						} else {
-							sender.sendMessage(ChatColor.RED + "ERROR: " + ChatColor.GRAY + "Player not found.");
+							ChatEventListener.nochat.remove(target.getName());
 						}
+					} else {
+						sender.sendMessage(Messages.no_permission);
 					}
-					if (ChatEventListener.nochat.contains(target.getName())) {
-						target.sendMessage(ChatColor.GRAY + "You have been deafened by " + sender.getName());
-						sender.sendMessage(ChatColor.GRAY + "You have deafened " + target.getName());
-						ChatEventListener.nochat.remove(target.getName());
-					}
-
 				}
 			}
 			if (args[0].equalsIgnoreCase("fakeop")) {
@@ -162,9 +179,11 @@ public class ChatCommand implements CommandExecutor {
 							faked.sendMessage(ChatColor.WHITE + "Opped " + faked.getName());
 							faked.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "[CONSOLE: Opped " + faked.getName() + "]");
 						} else {
-							sender.sendMessage(ChatColor.RED + "ERROR: " + ChatColor.GRAY + "Player not found.");
+							sender.sendMessage(Messages.player_not_found);
 						}
 					}
+				} else {
+					sender.sendMessage(Messages.no_permission);
 				}
 			}
 		}

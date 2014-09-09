@@ -30,9 +30,12 @@ public class ChatMaster extends JavaPlugin implements Listener {
 		getServer().getPluginCommand("cm").setExecutor(new ChatCommand());
 		getServer().getPluginCommand("pping").setExecutor(new ChatPing());
 		Silenced = false;
-		Updater updater = new Updater(this, 63203, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
-		update = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
-		name = updater.getLatestName();
+		if (getConfig().getBoolean("update")) {
+			Updater updater = new Updater(this, 63203, this.getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
+			update = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
+			name = updater.getLatestName();
+		}
+		
 		if (getConfig().getBoolean("metrics")) {
 			try {
 				Metrics metrics = new Metrics(this);
@@ -51,7 +54,7 @@ public class ChatMaster extends JavaPlugin implements Listener {
 				if (sender.hasPermission("chat.update") && ChatMaster.update) {
 					Updater updater = new Updater(this, 63203, this.getFile(), Updater.UpdateType.NO_VERSION_CHECK, true);
 					sender.sendMessage("ChatMaster is updating. Check console for progress.");
-				}	
+				}
 			}
 		} else {
 			sender.sendMessage("Updating is not enabled. Please enable updating in the config file.");

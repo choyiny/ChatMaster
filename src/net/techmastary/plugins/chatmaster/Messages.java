@@ -1,6 +1,8 @@
 package net.techmastary.plugins.chatmaster;
 
-public class ChatMessages {
+import org.bukkit.ChatColor;
+
+public class Messages {
 
 	private static String colorize(String string) {
 		if (string == null) {
@@ -11,4 +13,5 @@ public class ChatMessages {
 
 	static String invalid_arguments = colorize("&cInvalid Arguments.");
 	static String player_not_found = colorize("&4ERROR: &cPlayer Not found.");
+	static String no_permission = ChatColor.WHITE + "Unknown command. Type \"help\" for help.";
 }

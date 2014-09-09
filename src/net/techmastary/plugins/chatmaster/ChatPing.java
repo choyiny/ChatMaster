@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 public class ChatPing implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender.hasPermission("chat.pping")) {

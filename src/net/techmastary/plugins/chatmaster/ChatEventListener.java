@@ -1,8 +1,10 @@
 package net.techmastary.plugins.chatmaster;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -18,7 +20,7 @@ public class ChatEventListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void OnPlayerChat(AsyncPlayerChatEvent event) {
 		Set<?> receivers = event.getRecipients();
-		Player[] online = Bukkit.getServer().getOnlinePlayers();
+		Collection<? extends Player> online = Bukkit.getServer().getOnlinePlayers();
 		for (Player p : online) {
 			if ((!nochat.contains(p.getName())) || (!receivers.contains(p)))
 				continue;
