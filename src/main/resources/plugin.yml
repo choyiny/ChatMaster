@@ -1,0 +1,12 @@
+name: ChatMaster
+author: TechMastary
+database: false
+description: Kill players that Combat log
+main: net.techmastary.plugins.chatmaster.ChatMaster
+startup: postworld
+url: http://choy.in
+version: '2.0'
+commands:
+  cm:
+    description: ChatMaster base command.
+    usage: /<command>

@@ -12,3 +12,4 @@
 *.class
 
 *.class
+/target/
