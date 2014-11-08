@@ -11,5 +11,4 @@ Features
 * Clear chat in game
 * Be able to speak when chat is disabled
 * Compatible with all permissions plugins
-* Metrics
 * Help menu for players who has permissions to the command
