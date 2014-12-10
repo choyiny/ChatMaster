@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaff203a-d6e2-4bde-87c8-95dec8942b2b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.classpath" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.project" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.settings/org.eclipse.m2e.core.prefs" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/ChatCommand.java" afterPath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/ChatCommand.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/ChatEventListener.java" afterPath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/ChatEventListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/ChatMaster.java" afterPath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/ChatMaster.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/JoinQuitListener.java" afterPath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/JoinQuitListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/Messages.java" afterPath="$PROJECT_DIR$/src/main/java/net/techmastary/plugins/chatmaster/Messages.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-    </list>
+    <list default="true" id="aaff203a-d6e2-4bde-87c8-95dec8942b2b" name="Default" comment="" />
     <ignored path="ChatMaster.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/target/" />
