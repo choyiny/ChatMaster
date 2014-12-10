@@ -1,4 +1,4 @@
-package main.java.net.techmastary.plugins.chatmaster;
+package net.techmastary.plugins.chatmaster;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

@@ -1,4 +1,4 @@
-package main.java.net.techmastary.plugins.chatmaster;
+package net.techmastary.plugins.chatmaster;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -18,12 +18,15 @@ public class ChatCommand implements CommandExecutor {
 
 			// help command
 			if (args[0].equalsIgnoreCase("help")) {
+				
 			}
 
 			// reload command
 			if (args[0].equalsIgnoreCase("reload")) {
 				if (sender.hasPermission("cm.relaod")) {
 					plugin.reloadConfig();
+				} else {
+					sender.sendMessage(Messages.no_permission);
 				}
 			}
 
@@ -32,13 +35,28 @@ public class ChatCommand implements CommandExecutor {
 				if (sender.hasPermission("cm.silence")) {
 					if (!ChatEventListener.ChatSilenced) {
 						ChatEventListener.ChatSilenced = true;
-						Bukkit.broadcastMessage(Messages.silenced_global);
+						Bukkit.broadcastMessage(Messages.silenced_global(sender.getName()));
 						// TODO: Title
+						// TODO: Server config - Clear Chat?
 					} else {
 						ChatEventListener.ChatSilenced = false;
-						Bukkit.broadcastMessage(Messages.resumed_global);
+						Bukkit.broadcastMessage(Messages.resumed_global(sender.getName()));
 						// TODO: Title
 					}
+				} else {
+					sender.sendMessage(Messages.no_permission);
+				}
+			}
+
+			if (args[0].equalsIgnoreCase("status")) {
+				if (sender.hasPermission("cm.status")) {
+					if (!ChatEventListener.ChatSilenced) {
+						sender.sendMessage("");
+					} else {
+						sender.sendMessage("");
+					}
+				} else {
+					sender.sendMessage(Messages.no_permission);
 				}
 			}
 
@@ -48,8 +66,11 @@ public class ChatCommand implements CommandExecutor {
 					for (int x = 0; x < 120; x++) {
 						Bukkit.broadcastMessage("");
 					}
+				} else {
+					sender.sendMessage(Messages.no_permission);
 				}
 			}
+
 		}
 
 		return false;

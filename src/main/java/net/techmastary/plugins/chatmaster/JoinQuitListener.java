@@ -1,4 +1,4 @@
-package main.java.net.techmastary.plugins.chatmaster;
+package net.techmastary.plugins.chatmaster;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,13 +15,13 @@ public class JoinQuitListener implements Listener {
 
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player player = event.getPlayer();
-		
+
 		if (plugin.getConfig().getBoolean("joinmsg.enable")) {
 			event.setJoinMessage(plugin.getConfig().getString("joinmsg.message").replaceAll("&([0-9a-f])", "\u00A7$1").replace("%player%", player.getName()));
 		} else {
 			event.setJoinMessage(null);
 		}
-		
+
 		File folder = new File(plugin.getDataFolder() + "/", "users");
 		File UserFile = new File(folder, player.getUniqueId().toString() + ".yml");
 		YamlConfiguration UserData = YamlConfiguration.loadConfiguration(UserFile);

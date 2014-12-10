@@ -1,4 +1,4 @@
-package main.java.net.techmastary.plugins.chatmaster;
+package net.techmastary.plugins.chatmaster;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,17 +12,14 @@ public class ChatEventListener implements Listener {
 	@EventHandler
 	public void onPlayerChat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
-		//Disabled Global Chat
+		
+		//Global Chat Disabling
 		if (ChatSilenced) {
 			if (!player.hasPermission("cm.bypass")) {
 				event.setCancelled(true);
 			} else {
 				event.setCancelled(false);
 			}
-		}
-	}
-	
-	public void onPlayerJoin(PlayerJoinEvent event){
-		
+		}	
 	}
 }
