@@ -13,3 +13,7 @@ Features
 * Compatible with all permissions plugins
 * Metrics
 * Help menu for players who has permissions to the command
+
+Copyright
+------------
+ChatMaster is currently open-source software released under the MIT license. Please see the `LICENSE` file for details.
