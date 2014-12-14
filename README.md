@@ -1,6 +1,6 @@
 ChatMaster - A bukkit plugin.
 ==========
-Gain control of your servers' chat. [dev.bukkit.org/bukkit-plugins/chatmaster/](dev.bukkit.org/bukkit-plugins/chatmaster/)
+Gain control of your servers' chat. [dev.bukkit.org/bukkit-plugins/chatmaster/](http://dev.bukkit.org/bukkit-plugins/chatmaster/)
 
 Features
 ----------
