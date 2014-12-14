@@ -11,19 +11,19 @@ public class ChatCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (args.length == 0) {
-			sender.sendMessage(Messages.help);
+			sender.sendMessage(Messages.unknown);
 			return true;
 		}
 		if (args.length >= 1) {
 
 			// help command
 			if (args[0].equalsIgnoreCase("help")) {
-				
+				Messages.help(sender);
 			}
 
 			// reload command
 			if (args[0].equalsIgnoreCase("reload")) {
-				if (sender.hasPermission("cm.relaod")) {
+				if (sender.hasPermission("cm.reload")) {
 					plugin.reloadConfig();
 				} else {
 					sender.sendMessage(Messages.no_permission);
@@ -51,9 +51,9 @@ public class ChatCommand implements CommandExecutor {
 			if (args[0].equalsIgnoreCase("status")) {
 				if (sender.hasPermission("cm.status")) {
 					if (!ChatEventListener.ChatSilenced) {
-						sender.sendMessage("");
+						sender.sendMessage(Messages.global_on);
 					} else {
-						sender.sendMessage("");
+						sender.sendMessage(Messages.global_off);
 					}
 				} else {
 					sender.sendMessage(Messages.no_permission);

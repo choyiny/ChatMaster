@@ -13,3 +13,5 @@
 
 *.class
 /target/
+
+.idea/uiDesigner.xml
