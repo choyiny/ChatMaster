@@ -12,3 +12,8 @@
 *.class
 
 *.class
+
+# Eclipse
+.classpath
+.project
+.settings/
