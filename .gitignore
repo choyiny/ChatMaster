@@ -1,14 +1,13 @@
+## Eclipse
+bin/
+.settings/
+.project
+.classpath
+tmp/
+*.tmp
 
+## Java
 *.class
-
-*.class
-
-*.class
-
-*.class
-
-*.class
-
-*.class
-
-*.class
+*.jar
+*.war
+*.ear
